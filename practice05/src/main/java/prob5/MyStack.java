@@ -26,7 +26,7 @@ public class MyStack {
 		return top < 0;
 	}
 	
-	public String pop() throws MyStackException {
+	public String pop()  throws MyStackException {
 		if (top < 0) {
 			throw new MyStackException("Stack is empty");
 		}
