@@ -43,7 +43,6 @@ public class ChatServerThread extends Thread {
 				String request = br.readLine();
 				if (request == null) {
 					log("클라이언트로 부터 연결 끊김");
-					doQuit(pw);
 					break;
 				}
 				
@@ -59,10 +58,10 @@ public class ChatServerThread extends Thread {
 			}
 		} catch(SocketException e) {
 			log("suddenly closed by server");
+			doQuit(pw);
 		}  
 		catch (IOException e) {
 			log("클라이언트로 부터 연결 끊김");
-			doQuit(pw);
 		} finally {
 			try {
 				if (br != null) {
@@ -111,7 +110,7 @@ public class ChatServerThread extends Thread {
 		addWriter(pw);
 		
 		
-		pw.println("채팅방에 입장하였습니다.");
+		pw.println("join.ok");
 		pw.flush();
 		
 	}

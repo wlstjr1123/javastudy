@@ -26,7 +26,7 @@ public class ChatClient {
 			socket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT));
 			log("connected");
 			
-			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+//			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
 
 			System.out.print("닉네임>>");
