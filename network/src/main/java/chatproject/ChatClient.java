@@ -1,4 +1,4 @@
-package echo;
+package chatproject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,13 +10,14 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Scanner;
 
-public class EchoClient {
+public class ChatClient {
 	private static final String SERVER_IP = "127.0.0.1";
 	private static final int SERVER_PORT = 6000;
 	
 	public static void main(String[] args) {
-		Socket socket = null;
 		Scanner scanner = null;
+		Socket socket = null;
+		
 		try {
 			scanner = new Scanner(System.in);
 			
@@ -28,23 +29,23 @@ public class EchoClient {
 			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
 
+			System.out.print("닉네임>>");
+			String nickname = scanner.nextLine();
+			pw.println("join:" + nickname);
+			pw.flush();
+			
+			new ChatClientThread(socket).start();
+			
 			while(true) {
-				System.out.print(">");
-				String line = scanner.nextLine();
+				System.out.print(">>");
+				String input = scanner.nextLine();
 				
-				if("exit".equals(line)) {
+				if ("quit".equals(input) == true) {
+					pw.println("quit");
 					break;
+				} else {
+					pw.println("message:" + input);
 				}
-				
-				pw.println(line);
-				
-				String data = br.readLine();
-				if(data == null) {
-					log("closed by server");
-					break;
-				}
-				
-				System.out.println("<" + data);
 			}
 		} catch(SocketException e) {
 			log("suddenly closed by server");
@@ -65,6 +66,7 @@ public class EchoClient {
 	}
 	
 	private static void log(String log) {
-		System.out.println("[Echo Client] " + log);
+		System.out.println("[Client] " + log);
 	}
+
 }

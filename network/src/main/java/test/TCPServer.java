@@ -16,7 +16,6 @@ public class TCPServer {
 		try {
 			// 1. 서버소켓 생성
 			serverSocket = new ServerSocket();
-
 			// 2. 바인딩(binding)
 			// Socket에 InetSocketADdress(IPAddress + port)
 			// IPAdress : 0.0.0.0 : 모든 IP로 부터의 연결을 허용, 특정 호스트 IP바인딩 하지 않는다.
