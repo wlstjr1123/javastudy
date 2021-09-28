@@ -13,7 +13,7 @@ public class EchoServer {
 		ServerSocket serverSocket = null;
 		
 		try {
-			serverSocket = new ServerSocket();
+			serverSocket = new ServerSocket(); 
 			
 			serverSocket.bind(new InetSocketAddress("0.0.0.0", PORT));
 			log("starts... [port:" + PORT + "]");
